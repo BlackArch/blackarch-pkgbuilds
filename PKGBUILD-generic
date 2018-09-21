@@ -10,23 +10,23 @@ url='<URL pointing to download section of package>'
 license=('LICENSE' OR 'custom:unknown')
 depends=()
 makedepends=()
-source=("https://foo.bar/downloads/${pkgname}-${pkgver}.tar.gz")
+source=("https://foo.bar/downloads/$pkgname-$pkgver.tar.gz")
 sha512sums=('')
 
 prepare() {
-  cd "NAME-${pkgver}"
+  cd "NAME-$pkgver"
 
   ...
 }
 
 build() {
-  cd "NAME-${pkgver}"
+  cd "NAME-$pkgver"
 
   ...
 }
 
 package() {
-  cd "NAME-${pkgver}"
+  cd "NAME-$pkgver"
 
   ...
 
