@@ -1,0 +1,8 @@
+*.swp
+*~
+*.tmp
+tags
+
+.MTREE
+.PKGINFO
+
