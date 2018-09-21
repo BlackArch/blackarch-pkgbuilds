@@ -1,0 +1,54 @@
+# This file is part of BlackArch Linux ( http://blackarch.org ).
+# See COPYING for license details.
+
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+pkgdesc='Short description without using the package name itself.'
+arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64'>)
+url='<URL pointing to download section of package>'
+license=('LICENSE' OR 'custom:unknown')
+depends=()
+makedepends=()
+source=("https://foo.bar/downloads/${pkgname}-${pkgver}.tar.gz")
+sha512sums=('')
+
+prepare() {
+  cd "NAME-${pkgver}"
+
+  ...
+}
+
+build() {
+  cd "NAME-${pkgver}"
+
+  ...
+}
+
+package() {
+  cd "NAME-${pkgver}"
+
+  mkdir -p "$pkgdir/usr/bin"
+  mkdir -p "$pkgdir/usr/share/${pkgname}"
+
+  ...
+
+  # doc files
+  install -Dm 644 -t "$pkgdir/usr/share/doc/${pkgname}/" doc/* *.md
+
+  # license file
+  install -Dm 644 LICENSE "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
+
+  rm -rf doc/ *.md LICENSE
+
+  cp -a * "$pgdir/usr/share/${pkgname}/"
+
+  cat > "$pkgdir/usr/bin/${pkgname}" << EOF
+#!/bin/sh
+cd /usr/share/${pkgname}
+exec ./${pkgname} "\${@}"
+EOF
+
+  chmod a+x "$pkgdir/usr/bin/${pkgname}"
+}
+

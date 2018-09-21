@@ -1,0 +1,34 @@
+# This file is part of BlackArch Linux ( http://blackarch.org ).
+# See COPYING for license details.
+
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+pkgdesc='Short description without using the package name itself.'
+arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64'>)
+url='<URL pointing to download section of package>'
+license=('LICENSE' OR 'custom:unknown')
+depends=()
+makedepends=()
+source=('git+https://github.com/foo/bar.git')
+sha512sums=('')
+
+pkgver() {
+  cd NAME
+
+  # use, if no version string provided neither in sources nor in git describe:
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  cd NAME
+}
+
+build() {
+  cd NAME
+}
+
+package() {
+  cd NAME
+}
+
