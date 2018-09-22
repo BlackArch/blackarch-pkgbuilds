@@ -7,7 +7,7 @@ updates or adding new tools to the blackarch repostiory.
 ## Style enforcement / QA
 
 Please run [FFY00](https://github.com/FFY00)'s pkgcheck script prior to opening a pull requests. You can
-find the script here <https://github.com/FFY00/pkgcheck>
+find the script [here](https://github.com/FFY00/pkgcheck).
 
 ## Get Involved
 
