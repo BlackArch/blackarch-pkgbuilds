@@ -1,0 +1,37 @@
+# This file is part of BlackArch Linux ( http://blackarch.org ).
+# See COPYING for license details.
+
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+pkgdesc='Short description without using the package name itself.'
+arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64')
+url='URL pointing to download section of package'
+license=('WHATEVER' OR 'custom:unknown')
+options=('!emptydirs')
+depends=('perl')
+source=("http://search.cpan.org/CPAN/authors/foo/bar/NAME-$pkgver.tar.gz")
+sha512sums=('1')
+
+build() {
+  cd "IO-$pkgver"
+
+  ( export PERL_MM_USE_DEFAULT=1 PERL5LIB="" PERL_AUTOINSTALL=--skipdeps \
+    PERL_MM_OPT="INSTALLDIRS=vendor DESTDIR='$pkgdir'" \
+    PERL_MB_OPT="--installdirs vendor --destdir '$pkgdir'" \
+    MODULEBUILDRC=/dev/null
+
+    /usr/bin/perl Makefile.PL
+
+    make
+  )
+}
+
+package() {
+  cd "IO-$pkgver"
+
+  make install
+
+  find "$pkgdir" -name .packlist -o -name perllocal.pod -delete
+}
+
