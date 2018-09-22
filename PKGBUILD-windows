@@ -1,0 +1,23 @@
+# This file is part of BlackArch Linux ( http://blackarch.org ).
+# See COPYING for license details.
+
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+pkgdesc='Short description without using the package name itself.'
+arch=('any')
+groups=('blackarch' 'blackarch-windows' MORE_BLACKARCH_GROUPS_HERE)
+url='URL pointing to download section of package'
+license=('WHATEVER' OR 'custom:unknown')
+depends=()
+makedepends=()
+source=("https://foo.bar/downloads/$pkgname-$pkgver.zip")
+sha512sums=('')
+
+package() {
+  mkdir -p "$pkgdir/opt/windows/${pkgname}"
+
+  rm ${pkgname}-${pkgver}.zip
+
+  cp -a * "$pkgdir/opt/windows/${pkgname}"
+}
