@@ -5,7 +5,7 @@ pkgname=NAME
 pkgver=VERSION
 pkgrel=1
 pkgdesc='Short description without using the package name itself.'
-arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64')
+arch=('x86_64' 'armv6h' 'armv7h' 'aarch64')
 groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
 url='<URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
@@ -13,8 +13,9 @@ depends=()
 makedepends=()
 source=('git+https://github.com/foo/bar.git')
 sha512sums=('')
+_url='github.com/foo/bar'
 
-pkgver() {
+pkgver()
   cd NAME
 
   # use, if no version string provided neither in sources nor in git describe:
@@ -24,15 +25,23 @@ pkgver() {
   git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
-prepare() {
-  cd NAME
-}
-
 build() {
-  cd NAME
+  install -dm 755 src/${_url}
+
+  mv hyperfox src/${_url}
+
+  cd src/${_url}
+
+  GOPATH="$srcdir" go get -d -t ${_url}
 }
 
 package() {
-  cd NAME
+  install -dm 755 "$pkgdir/usr/bin"
+
+  GOPATH="$srcdir" go build -v ${_url}
+
+  install -Dm755 "$srcdir/${pkgname}" "$pkgdir/usr/bin/${pkgname}"
+  install -Dm644 src/${_url}/README.md "$pkgdir/usr/share/doc/${pkgname}/README.md"
+  install -Dm644 src/${_url}/LICENSE "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
 }
 
