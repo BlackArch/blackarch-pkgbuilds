@@ -1,0 +1,42 @@
+# This file is part of BlackArch Linux ( http://blackarch.org ).
+# See COPYING for license details.
+
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+pkgdesc=''
+arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64')
+url='URL pointing to download section of package'
+license=('WHATEVER' OR 'custom:unknown')
+depends=()
+makedepends=('ghc')
+install=NAME.install
+source=("https://foo.bar/downloads/$pkgname-$pkgver.tar.gz")
+sha512sums=('')
+
+build() {
+  cd "HKNAME-$pkgver"
+
+  runhaskell Setup configure -O -p --enable-split-objs --enable-shared \
+    --prefix=/usr --docdir="/usr/share/doc/NAME" \
+    --libsubdir=\$compiler/site-local/\$pkgid
+  runhaskell Setup build
+  runhaskell Setup haddock
+  runhaskell Setup register   --gen-script
+  runhaskell Setup unregister --gen-script
+  sed -i -r -e "s|ghc-pkg.*unregister[^ ]* |&'--force' |" unregister.sh
+}
+
+package() {
+  cd "HKNAME-$pkgver"
+
+  install -dm755 "$pkgdir/usr/share/doc/ghc/html/libraries"
+
+  install -Dm744 register.sh "$pkgdir/usr/share/haskell/NAME/register.sh"
+  install -m744 unregister.sh "$pkgdir/usr/share/haskell/NAME/unregister.sh"
+
+  ln -s "/usr/share/doc/NAME/html" "$pkgdir/usr/share/doc/ghc/html/libraries/HKNAME"
+
+  runhaskell Setup copy --destdir="$pkgdir"
+}
+
