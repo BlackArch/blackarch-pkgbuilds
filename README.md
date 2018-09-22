@@ -1,8 +1,13 @@
 ## Description
 
-Provides official BlackArch Linux PKGBUILD templates. These templates should be
-used in order to create pull-requests for any package updates or adding new
-tools to the blackarch repostiory.
+This repository provides official BlackArch Linux PKGBUILD templates. These
+templates should be used in order to create pull-requests for any package
+updates or adding new tools to the blackarch repostiory.
+
+## Style enforcement / QA
+
+Please run FFY00's pkgcheck script prior to opening a pull requests. You can
+find the script here <https://github.com/FFY00/pkgcheck>
 
 ## Get Involved
 
