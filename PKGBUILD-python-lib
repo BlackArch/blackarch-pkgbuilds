@@ -1,0 +1,29 @@
+# This file is part of BlackArch Linux ( http://blackarch.org ).
+# See COPYING for license details.
+
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+pkgdesc='Short description without using the package name itself.'
+arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64')
+groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
+url='URL pointing to download section of package'
+license=('WHATEVER' OR 'custom:unknown')
+depends=()
+makedepends=()
+options=(!emptydirs)
+source=("https://foo.bar/downloads/$pkgname-$pkgver.tar.gz")
+sha512sums=('')
+
+build() {
+  cd "NAME-$pkgver"
+
+  python setup.py build
+}
+
+package() {
+  cd "NAME-$pkgver"
+
+  python setup.py install --root="${pkgdir}" --optimize=1
+}
+
