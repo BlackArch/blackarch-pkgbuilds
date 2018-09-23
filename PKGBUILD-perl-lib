@@ -11,7 +11,7 @@ url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 options=('!emptydirs')
 depends=('perl')
-source=("http://search.cpan.org/CPAN/authors/foo/bar/NAME-$pkgver.tar.gz")
+source=("http://search.cpan.org/CPAN/authors/foo/bar/$pkgname-$pkgver.tar.gz")
 sha512sums=('1')
 
 build() {

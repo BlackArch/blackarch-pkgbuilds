@@ -21,10 +21,10 @@ package() {
 
   if [[ $CARCH == arm* ]] ; then
     gem install --ignore-dependencies --no-user-install --no-rdoc --no-ri \
-      -i "${pkgdir}${_gemdir}" ${_gemname}-${pkgver}.gem
+      -i "$pkgdir$_gemdir" $_gemname-$pkgver.gem
   else
-    gem install --ignore-dependencies --no-user-install -i "${pkgdir}${_gemdir}" \
-      ${_gemname}-${pkgver}.gem
+    gem install --ignore-dependencies --no-user-install -i "$pkgdir$_gemdir" \
+      $_gemname-$pkgver.gem
   fi
 }
 

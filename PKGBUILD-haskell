@@ -33,10 +33,11 @@ package() {
 
   install -dm755 "$pkgdir/usr/share/doc/ghc/html/libraries"
 
-  install -Dm744 register.sh "$pkgdir/usr/share/haskell/NAME/register.sh"
-  install -m744 unregister.sh "$pkgdir/usr/share/haskell/NAME/unregister.sh"
+  install -Dm744 register.sh "$pkgdir/usr/share/haskell/$pkgname/register.sh"
+  install -m744 unregister.sh "$pkgdir/usr/share/haskell/$pkgname/unregister.sh"
 
-  ln -s "/usr/share/doc/NAME/html" "$pkgdir/usr/share/doc/ghc/html/libraries/HKNAME"
+  ln -s "/usr/share/doc/$pkgname/html" \
+    "$pkgdir/usr/share/doc/ghc/html/libraries/HKNAME"
 
   runhaskell Setup copy --destdir="$pkgdir"
 }
