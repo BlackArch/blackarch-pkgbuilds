@@ -14,13 +14,13 @@ source=("")
 sha512sums=('')
 
 build() {
-  cd "NAME-$pkgver"
+  cd "$pkgname-$pkgver"
 
   python setup.py install --root="$pkgdir"
 }
 
 package() {
-  cd "NAME-$pkgver"
+  cd "$pkgname-$pkgver"
 
   python setup.py install --root="$pkgdir" --optimize=1
 }

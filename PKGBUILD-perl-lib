@@ -15,7 +15,7 @@ source=("http://search.cpan.org/CPAN/authors/foo/bar/$pkgname-$pkgver.tar.gz")
 sha512sums=('1')
 
 build() {
-  cd "IO-$pkgver"
+  cd "$pkgname"
 
   ( export PERL_MM_USE_DEFAULT=1 PERL5LIB="" PERL_AUTOINSTALL=--skipdeps \
     PERL_MM_OPT="INSTALLDIRS=vendor DESTDIR='$pkgdir'" \
@@ -29,7 +29,7 @@ build() {
 }
 
 package() {
-  cd "IO-$pkgver"
+  cd "$pkgname"
 
   make install
 

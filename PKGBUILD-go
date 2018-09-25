@@ -16,7 +16,7 @@ sha512sums=('')
 _url='github.com/foo/bar'
 
 pkgver()
-  cd NAME
+  cd "$pkgname"
 
   # use, if no version string provided neither in sources nor in git describe:
   echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
@@ -28,7 +28,7 @@ pkgver()
 build() {
   install -dm 755 src/$_url
 
-  mv hyperfox src/$_url
+  mv $pkgname src/$_url
 
   cd src/$_url
 

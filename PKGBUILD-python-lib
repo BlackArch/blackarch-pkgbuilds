@@ -16,13 +16,13 @@ source=("https://foo.bar/downloads/$pkgname-$pkgver.tar.gz")
 sha512sums=('')
 
 build() {
-  cd "NAME-$pkgver"
+  cd "$pkgname-$pkgver"
 
   python setup.py build
 }
 
 package() {
-  cd "NAME-$pkgver"
+  cd "$pkgname-$pkgver"
 
   python setup.py install --root="$pkgdir" --optimize=1
 }

@@ -16,7 +16,7 @@ source=("https://foo.bar/downloads/$pkgname-$pkgver.tar.gz")
 sha512sums=('')
 
 build() {
-  cd "HKNAME-$pkgver"
+  cd "$pkgname"
 
   runhaskell Setup configure -O -p --enable-split-objs --enable-shared \
     --prefix=/usr --docdir="/usr/share/doc/NAME" \
@@ -29,7 +29,7 @@ build() {
 }
 
 package() {
-  cd "HKNAME-$pkgver"
+  cd "$pkgname"
 
   install -dm755 "$pkgdir/usr/share/doc/ghc/html/libraries"
 
@@ -37,7 +37,7 @@ package() {
   install -m744 unregister.sh "$pkgdir/usr/share/haskell/$pkgname/unregister.sh"
 
   ln -s "/usr/share/doc/$pkgname/html" \
-    "$pkgdir/usr/share/doc/ghc/html/libraries/HKNAME"
+    "$pkgdir/usr/share/doc/$pkgname/html/libraries/HKNAME"
 
   runhaskell Setup copy --destdir="$pkgdir"
 }
