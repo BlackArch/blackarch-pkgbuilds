@@ -15,19 +15,19 @@ source=("https://foo.bar/downloads/$pkgname-$pkgver.tar.gz")
 sha512sums=('')
 
 prepare() {
-  cd "NAME-$pkgver"
+  cd "$pkgname-$pkgver"
 
   ...
 }
 
 build() {
-  cd "NAME-$pkgver"
+  cd "$pkgname-$pkgver"
 
   ...
 }
 
 package() {
-  cd "NAME-$pkgver"
+  cd "$pkgname-$pkgver"
 
   install -dm 755 "$pkgdir/usr/bin"
   install -dm 755 "$pkgdir/usr/share/$pkgname"
@@ -44,9 +44,10 @@ package() {
   cat > "$pkgdir/usr/bin/$pkgname" << EOF
 #!/bin/sh
 cd /usr/share/$pkgname
-exec ./$pkgname "\${@}"
+exec ./$pkgname "\$@"
 EOF
 
   chmod a+x "$pkgdir/usr/bin/$pkgname"
 }
+
 
