@@ -15,7 +15,7 @@ source=('git+https://github.com/foo/bar.git')
 sha512sums=('')
 
 pkgver() {
-  cd "$pkgname"
+  cd $pkgname
 
   # use, if no version string provided neither in sources nor in git describe:
   echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
@@ -25,19 +25,19 @@ pkgver() {
 }
 
 prepare() {
-  cd "$pkgname"
+  cd $pkgname
 
   ...
 }
 
 build() {
-  cd "$pkgname"
+  cd $pkgname
 
   ...
 }
 
 package() {
-  cd "$pkgname"
+  cd $pkgname
 
   ...
 }
