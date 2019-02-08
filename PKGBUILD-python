@@ -9,7 +9,7 @@ arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 depends=('python')
-makedepends=()
+makedepends=('python-setuptools')
 source=("")
 sha512sums=('')
 
