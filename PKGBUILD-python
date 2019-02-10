@@ -16,7 +16,7 @@ sha512sums=('')
 build() {
   cd "$pkgname-$pkgver"
 
-  python setup.py build --root="$pkgdir"
+  python setup.py build
 }
 
 package() {
