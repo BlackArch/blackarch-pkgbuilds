@@ -10,9 +10,9 @@ groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
 url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 depends=()
-makedepends=()
-source=('git+https://github.com/foo/bar.git')
-sha512sums=('')
+makedepends=('git')
+source=("git+https://github.com/foo/$pkgname.git")
+sha512sums=('SKIP')
 
 pkgver() {
   cd $pkgname
