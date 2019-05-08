@@ -11,7 +11,7 @@ url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 depends=()
 makedepends=('git')
-source=("git+https://github.com/foo/$pkgname.git")
+source=("$pkgname::git+https://github.com/foo/$pkgname.git")
 sha512sums=('SKIP')
 
 pkgver() {

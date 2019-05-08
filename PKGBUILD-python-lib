@@ -6,7 +6,6 @@ pkgver=VERSION
 pkgrel=1
 pkgdesc='Short description without using the package name itself.'
 arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64')
-groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
 url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 depends=()

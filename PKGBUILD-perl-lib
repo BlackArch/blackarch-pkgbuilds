@@ -6,7 +6,6 @@ pkgver=VERSION
 pkgrel=1
 pkgdesc='Short description without using the package name itself.'
 arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64')
-groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
 url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 options=('!emptydirs')
@@ -15,7 +14,7 @@ source=("http://search.cpan.org/CPAN/authors/foo/bar/$pkgname-$pkgver.tar.gz")
 sha512sums=('1')
 
 build() {
-  cd "$pkgname"
+  cd $pkgname
 
   ( export PERL_MM_USE_DEFAULT=1 PERL5LIB="" PERL_AUTOINSTALL=--skipdeps \
     PERL_MM_OPT="INSTALLDIRS=vendor DESTDIR='$pkgdir'" \
@@ -29,7 +28,7 @@ build() {
 }
 
 package() {
-  cd "$pkgname"
+  cd $pkgname
 
   make install
 

@@ -7,7 +7,6 @@ pkgver=VERSION
 pkgrel=1
 pkgdesc='Short description without using the package name itself.'
 arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64')
-groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
 url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 depends=('ruby')
@@ -21,10 +20,10 @@ package() {
 
   if [[ $CARCH == arm* ]] ; then
     gem install --ignore-dependencies --no-user-install --no-rdoc --no-ri \
-      -i "$pkgdir$_gemdir" $_gemname-$pkgver.gem
+      -i "$pkgdir$_gemdir" "$_gemname-$pkgver.gem"
   else
     gem install --ignore-dependencies --no-user-install -i "$pkgdir$_gemdir" \
-      $_gemname-$pkgver.gem
+      "$_gemname-$pkgver.gem"
   fi
 }
 

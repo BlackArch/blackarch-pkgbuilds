@@ -16,15 +16,17 @@ source=("https://foo.bar/downloads/$pkgname-$pkgver.tar.gz")
 sha512sums=('')
 
 build() {
-  cd "$pkgname"
+  cd $pkgname
 
   runhaskell Setup configure -O -p --enable-split-objs --enable-shared \
     --prefix=/usr --docdir="/usr/share/doc/NAME" \
     --libsubdir=\$compiler/site-local/\$pkgid
+
   runhaskell Setup build
   runhaskell Setup haddock
   runhaskell Setup register   --gen-script
   runhaskell Setup unregister --gen-script
+
   sed -i -r -e "s|ghc-pkg.*unregister[^ ]* |&'--force' |" unregister.sh
 }
 
