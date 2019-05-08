@@ -1,27 +1,45 @@
 # This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
 # See COPYING for license details.
 
-pkgname=NAME
+pkgbase=NAME
+pkgname=('python2-NAME' 'python-NAME')
 pkgver=VERSION
 pkgrel=1
 pkgdesc='Short description without using the package name itself.'
 arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
-depends=()
-makedepends=('python-setuptools')
+makedepends=('python2-setuptools' 'python-setuptools')
 options=(!emptydirs)
 source=("https://foo.bar/downloads/$pkgname-$pkgver.tar.gz")
 sha512sums=('')
 
+prepare() {
+  cp -a "NAME-$pkgver" "NAME2-$pkgver"
+}
+
 build() {
-  cd "$pkgname-$pkgver"
+  cd "NAME2-$pkgver"
+
+  python2 setup.py build
+
+  cd "$srcdir/NAME-$pkgver"
 
   python setup.py build
 }
 
-package() {
-  cd "$pkgname-$pkgver"
+package_python2-NAME() {
+  depends=('what' 'ever')
+
+  cd "NAME2-$pkgver"
+
+  python2 setup.py install --root="$pkgdir" --optimize=1 --skip-build
+}
+
+package_python-NAME() {
+  depends=('what' 'ever')
+
+  cd "NAME-$pkgver"
 
   python setup.py install --root="$pkgdir" --optimize=1 --skip-build
 }
