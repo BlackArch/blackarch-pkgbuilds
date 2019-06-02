@@ -7,7 +7,7 @@ pkgrel=1
 pkgdesc='Short description without using the package name itself.'
 arch=('x86_64' 'armv6h' 'armv7h' 'aarch64')
 groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
-url='<URL pointing to download section of package'
+url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 depends=()
 makedepends=()
@@ -15,8 +15,8 @@ source=('git+https://github.com/foo/bar.git')
 sha512sums=('')
 _url='github.com/foo/bar'
 
-pkgver()
-  cd "$pkgname"
+pkgver() {
+  cd $pkgname
 
   # use, if no version string provided neither in sources nor in git describe:
   echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
@@ -26,9 +26,10 @@ pkgver()
 }
 
 build() {
-  mkdir -p "src/$_url" && mv $pkgname "src/$_url" && cd "src/$_url"
+  mkdir -p "src/$_url" && rm -rf "src/$_url" && mv $pkgname "src/$_url" &&
+    cd "src/$_url"
 
-  GOPATH="$srcdir" go get -d $_url
+  GOPATH="$srcdir" go get -v -d $_url
 }
 
 package() {
