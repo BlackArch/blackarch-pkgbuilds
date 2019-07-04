@@ -16,7 +16,7 @@ source=("https://foo.bar/downloads/$pkgname-$pkgver.tar.gz")
 sha512sums=('')
 
 prepare() {
-  cp -a "$_pkgname-$pkgver" "$_pkgname-$pkgver-2"
+  cp -a "$_pkgname-$pkgver"{,-2}
 }
 
 build() {
