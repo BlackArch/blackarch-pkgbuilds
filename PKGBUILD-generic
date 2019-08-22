@@ -12,7 +12,7 @@ license=('WHATEVER' OR 'custom:unknown')
 depends=()
 makedepends=()
 source=("https://foo.bar/downloads/$pkgname-$pkgver.tar.gz")
-sha512sums=('')
+sha512sums=()
 
 prepare() {
   cd "$pkgname-$pkgver"
