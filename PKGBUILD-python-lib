@@ -12,7 +12,7 @@ url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 makedepends=('python2-setuptools' 'python-setuptools')
 options=(!emptydirs)
-source=("https://foo.bar/downloads/$pkgname-$pkgver.tar.gz")
+source=("https://foo.bar/downloads/$_pkgname-$pkgver.tar.gz")
 sha512sums=('')
 
 prepare() {
@@ -34,7 +34,7 @@ package_python2-NAME() {
 
   cd "$_pkgname-$pkgver-2"
 
-  python2 setup.py install --root="$pkgdir" --optimize=1 --skip-build
+  python2 setup.py install --root="$pkgdir" -O1 --skip-build
 }
 
 package_python-NAME() {
@@ -42,6 +42,6 @@ package_python-NAME() {
 
   cd "$_pkgname-$pkgver"
 
-  python setup.py install --root="$pkgdir" --optimize=1 --skip-build
+  python setup.py install --root="$pkgdir" -O1 --skip-build
 }
 
