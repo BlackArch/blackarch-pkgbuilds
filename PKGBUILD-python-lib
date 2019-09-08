@@ -34,7 +34,7 @@ package_python2-NAME() {
 
   cd "$_pkgname-$pkgver-2"
 
-  python2 setup.py install --root="$pkgdir" -O1 --skip-build
+  python2 setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
 }
 
 package_python-NAME() {
@@ -42,6 +42,6 @@ package_python-NAME() {
 
   cd "$_pkgname-$pkgver"
 
-  python setup.py install --root="$pkgdir" -O1 --skip-build
+  python setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
 }
 
