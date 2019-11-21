@@ -20,7 +20,7 @@ pkgver() {
   # use, if no version string provided neither in sources nor in git describe:
   echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 
-  # if s tag exists, use this
+  # if tag exists, use this
   git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
