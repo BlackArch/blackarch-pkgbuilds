@@ -39,7 +39,7 @@ package() {
 
   rm -rf doc/ *.md LICENSE
 
-  cp -a * "$pgdir/usr/share/$pkgname/"
+  cp -a * "$pkgdir/usr/share/$pkgname/"
 
   cat > "$pkgdir/usr/bin/$pkgname" << EOF
 #!/bin/sh
