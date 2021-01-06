@@ -1,0 +1,29 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+pkgdesc='Short description without using the package name itself.'
+arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64')
+groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
+url='URL pointing to download section of package'
+license=('WHATEVER' OR 'custom:unknown')
+depends=('java-environment')
+makedepends=()
+source=("https://foo.bar/downloads/$pkgname-$pkgver.jar")
+sha512sums=()
+
+package() {
+  install -dm 755 "$pkgdir/usr/bin"
+
+  install -Dm 755 "$pkgname-$pkgver.jar" "$pkgdir/usr/share/$pkgname/$pkgname-$pkgver.jar"
+
+  cat > "$pkgdir/usr/bin/$pkgname" << EOF
+#!/bin/sh
+exec java -jar /usr/share/$pkgname/$pkgname-$pkgver.jar "\$@"
+EOF
+
+  chmod +x "$pkgdir/usr/bin/$pkgname"
+}
+
