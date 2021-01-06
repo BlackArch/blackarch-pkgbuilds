@@ -14,7 +14,7 @@ conflicts=('NAME')
 provides=('NAME')
 options=(!emptydirs)
 source=("git+https://github.com/foo/$_gemname.git")
-b2sums=('SKIP')
+sha512sums=('SKIP')
 
 pkgver() {
   cd $_gemname
