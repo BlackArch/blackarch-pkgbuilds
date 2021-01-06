@@ -2,7 +2,7 @@
 # See COPYING for license details.
 
 _gemname=GEM_NAME
-pkgname=NAME
+pkgname=ruby-NAME
 pkgver=VERSION
 pkgrel=1
 pkgdesc='Short description without using the package name itself.'
