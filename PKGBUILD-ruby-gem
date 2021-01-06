@@ -13,7 +13,7 @@ license=('WHATEVER' OR 'custom:unknown')
 depends=('ruby')
 source=("https://rubygems.org/downloads/$_gemname-$pkgver.gem")
 noextract=("$_gemname-$pkgver.gem")
-b2sums=()
+sha512sums=()
 
 package() {
   local _gemdir="$(ruby -e'puts Gem.default_dir')"
