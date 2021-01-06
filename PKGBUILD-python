@@ -11,7 +11,7 @@ url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 depends=('python')
 makedepends=('python-setuptools')
-source=("")
+source=("https://files.pythonhosted.org/packages/source/{first letter of package name}/{package name}/$_pkgname-$pkgver.tar.gz")
 sha512sums=('')
 
 build() {
