@@ -1,0 +1,41 @@
+# This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
+# See COPYING for license details.
+
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+pkgdesc='Short description without using the package name itself.'
+arch=('x86_64' 'armv6h' 'armv7h' 'aarch64')
+groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
+url='URL pointing to download section of package'
+license=('WHATEVER' OR 'custom:unknown')
+depends=()
+makedepends=('git' 'cargo')
+source=("git+https://github.com/foo/$pkgname.git")
+sha512sums=('')
+
+pkgver() {
+  cd $pkgname
+
+  # use, if no version string provided neither in sources nor in git describe:
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+
+  # if s tag exists, use this
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd $pkgname
+
+  cargo build --release --locked
+}
+
+package() {
+  cd $pkgname
+
+  install -Dm 755 "target/release/$pkgname" "$pkgdir/usr/bin/$pkgname"
+  install -Dm 644 README.md -t "$pkgdir/usr/share/doc/$pkgname"
+  install -Dm 644 LICENSE \
+    "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
+
