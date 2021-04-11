@@ -13,7 +13,6 @@ depends=()
 makedepends=('git' 'go-pie')
 source=("git+https://github.com/foo/$pkgname.git")
 sha512sums=('')
-_url='github.com/foo/bar'
 
 pkgver() {
   cd $pkgname
@@ -25,16 +24,20 @@ pkgver() {
   git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
-build() {
-  mkdir -p "src/$_url" && rm -rf "src/$_url" && mv $pkgname "src/$_url" &&
-    cd "src/$_url"
+prepare() {
+  cd $pkgname
 
-  GOPATH="$srcdir" go get -v -d $_url
-  GOPATH="$srcdir" go build -v $_url
+  GO111MODULE=auto GOPATH="$srcdir" go get -v -d -t .
+}
+
+build() {
+  cd $pkgname
+
+  GOPATH="$srcdir" go build -v .
 }
 
 package() {
-  cd "src/$_url"
+  cd $pkgname
 
   install -Dm 755 $pkgname "$pkgdir/usr/bin/$pkgname"
   install -Dm 644 -t "$pkgdir/usr/share/doc/$pkgname/" README.md
