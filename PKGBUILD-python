@@ -2,6 +2,7 @@
 # See COPYING for license details.
 
 pkgname=NAME
+_pkgname=PYPINAME
 pkgver=VERSION
 pkgrel=1
 pkgdesc='Short description without using the package name itself.'
@@ -11,17 +12,17 @@ url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 depends=('python')
 makedepends=('python-setuptools')
-source=("https://files.pythonhosted.org/packages/source/{first letter of package name}/{package name}/$_pkgname-$pkgver.tar.gz")
+source=("https://files.pythonhosted.org/packages/source/${_pkgname:0:1}/$_pkgname/$_pkgname-$pkgver.tar.gz")
 sha512sums=('')
 
 build() {
-  cd "$pkgname-$pkgver"
+  cd "$_pkgname-$pkgver"
 
   python setup.py build
 }
 
 package() {
-  cd "$pkgname-$pkgver"
+  cd "$_pkgname-$pkgver"
 
   python setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
 }
