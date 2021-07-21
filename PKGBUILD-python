@@ -2,7 +2,6 @@
 # See COPYING for license details.
 
 pkgname=NAME
-_pkgname=PYPINAME
 pkgver=VERSION
 pkgrel=1
 pkgdesc='Short description without using the package name itself.'
@@ -16,13 +15,13 @@ source=("https://files.pythonhosted.org/packages/source/${_pkgname:0:1}/$_pkgnam
 sha512sums=('')
 
 build() {
-  cd "$_pkgname-$pkgver"
+  cd "$pkgname-$pkgver"
 
   python setup.py build
 }
 
 package() {
-  cd "$_pkgname-$pkgver"
+  cd "$pkgname-$pkgver"
 
   python setup.py install --root="$pkgdir" --prefix=/usr -O1 --skip-build
 }
