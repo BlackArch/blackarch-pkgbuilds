@@ -1,8 +1,8 @@
 # This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
 # See COPYING for license details.
 
+pkgname=NAME
 _gemname=GEM_NAME
-pkgname=NAME-git
 pkgver=VERSION
 pkgrel=1
 pkgdesc='Short description without using the package name itself.'
@@ -36,12 +36,20 @@ build() {
 package() {
   cd $_gemname
 
-  local _gemdir="$(ruby -e'puts Gem.default_dir')"
-  local _release=$(gem build foo.gemspec | grep Version | cut -d' ' -f4)
-  gem install --ignore-dependencies --no-user-install --no-document -i "$pkgdir/$_gemdir" -n "$pkgdir/usr/bin" $_gemname-$_release.gem
+  _gemdir="$(ruby -e'puts Gem.default_dir')"
+  _release=$(gem build foo.gemspec | grep Version | cut -d' ' -f4)
+
+  gem install --ignore-dependencies --no-user-install --no-document \
+    -i "$pkgdir/$_gemdir" -n "$pkgdir/usr/bin" "$_gemname-$_release.gem"
+
   rm "$pkgdir/$_gemdir/cache/$_gemname-$_release.gem"
+
   find "$pkgdir/$_gemdir/extensions/" -name *.so -delete
+
   rm -r "$pkgdir/$_gemdir/gems/$_gemname-$_release/test"
-  install -D -m644 "$pkgdir/$_gemdir/gems/$_gemname-$_release/LICENSE.txt" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+
+  # only if necessary
+  install -Dm 644 "$pkgdir/$_gemdir/gems/$_gemname-$_release/LICENSE.txt" \
+    "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 

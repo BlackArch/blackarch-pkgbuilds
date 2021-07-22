@@ -42,7 +42,7 @@ package() {
   cat > "$pkgdir/usr/bin/$pkgname" << EOF
 #!/bin/sh
 cd /usr/share/$pkgname
-ruby $pkgname "\$@"
+exec ruby $pkgname "\$@"
 EOF
 
   chmod +x "$pkgdir"/usr/bin/*
