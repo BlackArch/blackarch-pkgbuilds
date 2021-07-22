@@ -48,7 +48,8 @@ package() {
 
   rm -r "$pkgdir/$_gemdir/gems/$_gemname-$_release/test"
 
-  # only if necessary
+  # Only install license if required according to
+  # https://wiki.archlinux.org/index.php/PKGBUILD#license
   install -Dm 644 "$pkgdir/$_gemdir/gems/$_gemname-$_release/LICENSE.txt" \
     "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }

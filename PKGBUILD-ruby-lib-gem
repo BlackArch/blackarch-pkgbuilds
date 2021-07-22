@@ -28,7 +28,8 @@ package() {
 
   find "$pkgdir/$_gemdir/extensions/" -name *.so -delete
 
-  # only if necessary
+  # Only install license if required according to
+  # https://wiki.archlinux.org/index.php/PKGBUILD#license
   install -Dm 644 "$pkgdir/$_gemdir/gems/$_gemname-$pkgver/LICENSE.txt" \
     "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
