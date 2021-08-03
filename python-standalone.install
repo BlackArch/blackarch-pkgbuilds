@@ -1,0 +1,17 @@
+post_install() {
+  set -e
+  cd /usr/share/NAME
+  python -m venv venv
+  source venv/bin/activate &&
+    pip install --isolated --root="/usr/share/NAME" --prefix='venv' \
+      -r requirements.txt
+    pip install -e .
+    # if from pypi
+    # pip install --isolated --root="/usr/share/NAME" --prefix='venv' \
+    #   NAME
+}
+
+post_upgrade() {
+  post_install "$@"
+}
+
