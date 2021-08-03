@@ -2,52 +2,52 @@
 # See COPYING for license details.
 
 pkgname=NAME
-_pkgname=NAME2
 pkgver=VERSION
 pkgrel=1
-groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
 pkgdesc='Short description without using the package name itself.'
 arch=('any' OR 'x86_64' 'armv6h' 'armv7h' 'aarch64')
-license=('WHATEVER' OR 'custom:unknown')
-makedepends=('git' 'ruby-bundler')
-depends=('ruby')
+groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
 url='URL pointing to download section of package'
-source=("git+https://github.com/foo/$_pkgname.git")
+license=('WHATEVER' OR 'custom:unknown')
+depends=('python')
+makedepends=('git' 'python-setuptools' 'python-pip')
+source=("git+https://github.com/foo/$pkgname.git")
+# if from pypi
+#source=("https://files.pythonhosted.org/packages/source/${_pkgname:0:1}/$_pkgname/$_pkgname-$pkgver.tar.gz")
 sha512sums=('SKIP')
 install="$pkgname.install"
 
 pkgver() {
-  cd $_gemname
+  cd $pkgname
 
   # use, if no version string provided neither in sources nor in git describe:
   echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 
   # if tag exists, use this
-  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 package() {
-  cd $_pkgname
+  cd $pkgname
 
   install -dm 755 "$pkgdir/usr/bin"
-  install -dm 755 "$pkgdir/usr/share/$pkgname"
-
-  install -Dm 644 -t "$pkgdir/usr/share/doc/$pkgname" *.md
+  install -Dm 644 requirements.txt "$pkgdir/usr/share/$pkgname/requirements.txt"
+  install -Dm 644 -t "$pkgdir/usr/share/doc/$pkgname/" *.md docs/*.md
 
   # Only install license if required according to
   # https://wiki.archlinux.org/index.php/PKGBUILD#license
   install -Dm 644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 
-  rm -rf doc/ *.md LICENSE
+  rm -rf LICENSE *.md docs/*.md .gitignore
 
-  cp --no-preserve=ownership -a * "$pkgdir/usr/share/$pkgname/"
+  cp -a * "$pkgdir/usr/share/$pkgname/"
 
   cat > "$pkgdir/usr/bin/$pkgname" << EOF
 #!/bin/sh
-cd /usr/share/$pkgname
-exec ruby $pkgname "\$@"
+source /usr/share/$pkgname/venv/bin/activate
+exec python /usr/share/$pkgname/NAME.py "\$@"
 EOF
 
-  chmod +x "$pkgdir"/usr/bin/*
+  chmod a+x "$pkgdir/usr/bin/$pkgname"
 }
 
