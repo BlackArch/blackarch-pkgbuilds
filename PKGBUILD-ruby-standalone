@@ -17,13 +17,13 @@ sha512sums=('SKIP')
 install="$pkgname.install"
 
 pkgver() {
-  cd $_gemname
+  cd $_pkgname
 
   # use, if no version string provided neither in sources nor in git describe:
   echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 
   # if tag exists, use this
-  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 package() {
