@@ -1,53 +1,56 @@
 # This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
 # See COPYING for license details.
-# https://bit.ly/3uET3KA
 
 _pkgname=NAME
-
-pkgname="${_pkgname}"-appimage
+pkgname=$_pkgname-appimage
 pkgver=VERSION
 pkgrel=1
-pkgdesc="Short description without using the package name itself."
+pkgdesc='Short description without using the package name itself.'
 arch=('any' OR 'x86_64' 'aarch64')
 groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
-url="URL pointing to download section of package"
+url='URL pointing to download section of package.'
 license=('WHATEVER' OR 'custom:unknown')
 depends=()
 options=(!strip)
-_appimage="${pkgname}-${pkgver}.AppImage"
-source_x86_64=("${_appimage}::https://github.com/user/repo/releases/download/${pkgver}/${_pkgname}.${pkgver}.AppImage"
-               "https://raw.githubusercontent.com/user/repo/${pkgver}/LICENSE"
+_appimage="$pkgname-$pkgver.AppImage"
+source_x86_64=("$_appimage::https://github.com/user/repo/releases/download/$pkgver/$_pkgname.$pkgver.AppImage"
+               "https://raw.githubusercontent.com/user/repo/$pkgver/LICENSE"
               )
-noextract=("${_appimage}")
+noextract=($_appimage)
 sha512sums=()
 
 prepare() {
-    chmod +x "${_appimage}"
-    ./"${_appimage}" --appimage-extract
+  chmod +x $_appimage
+
+  ./$_appimage --appimage-extract
 }
 
 build() {
-    sed -i -E "s|Exec=AppRun|Exec=env DESKTOPINTEGRATION=false /usr/bin/${_pkgname}|" \
-      "squashfs-root/${_pkgname}.desktop"
+  sed -i -E \
+    "s|Exec=AppRun|Exec=env DESKTOPINTEGRATION=false /usr/bin/$_pkgname|" \
+    "squashfs-root/$_pkgname.desktop"
+
     chmod -R a-x+rX squashfs-root/usr
 }
 
 package() {
-    install -Dm755 "${srcdir}/${_appimage}" "${pkgdir}/opt/${pkgname}/${pkgname}.AppImage"
-    install -Dm644 "${srcdir}/LICENSE" "${pkgdir}/opt/${pkgname}/LICENSE"
+  install -Dm 755 "$srcdir/$_appimage" "$pkgdir/opt/$pkgname/$pkgname.AppImage"
+  install -Dm 644 "$srcdir/LICENSE" "$pkgdir/opt/$pkgname/LICENSE"
 
-    install -Dm644 "${srcdir}/squashfs-root/${_pkgname}.desktop" \
-      "${pkgdir}/usr/share/applications/${_pkgname}.desktop"
+  install -Dm 644 "$srcdir/squashfs-root/$_pkgname.desktop" \
+    "$pkgdir/usr/share/applications/$_pkgname.desktop"
 
-    install -dm755 "${pkgdir}/usr/share/applications/"
-    cp -a "${srcdir}/squashfs-root/usr/share/icons" "${pkgdir}/usr/share/"
-    cp -a "${srcdir}/squashfs-root/${_pkgname}.desktop" "${pkgdir}/usr/share/applications/"
+  install -dm 755 "$pkgdir/usr/share/applications/"
+  cp -a "$srcdir/squashfs-root/usr/share/icons" "$pkgdir/usr/share/"
+  cp -a "$srcdir/squashfs-root/$_pkgname.desktop" \
+    "$pkgdir/usr/share/applications/"
 
-    install -dm755 "${pkgdir}/usr/bin"
-    ln -s "/opt/${pkgname}/${pkgname}.AppImage" "${pkgdir}/usr/bin/${_pkgname}"
+  install -dm 755 "$pkgdir/usr/bin"
+  ln -s "/opt/$pkgname/$pkgname.AppImage" "$pkgdir/usr/bin/$_pkgname"
 
-    # Only install license if required according to
-    # https://wiki.archlinux.org/index.php/PKGBUILD#license
-    install -dm755 "${pkgdir}/usr/share/licenses/${pkgname}/"
-    install -m644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/"
+  # Only install license if required according to
+  # https://wiki.archlinux.org/index.php/PKGBUILD#license
+  install -dm 755 "$pkgdir/usr/share/licenses/$pkgname/"
+  install -m 644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/"
 }
+
