@@ -11,7 +11,7 @@ url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 depends=('python')
 makedepends=('python-build' 'python-pip')
-source=("https://files.pythonhosted.org/packages/source/${_pkgname::1}/$_pkgname/$_pkgname-$pkgver.tar.gz")
+source=("https://files.pythonhosted.org/packages/source/${pkgname::1}/$pkgname/$pkgname-$pkgver.tar.gz")
 sha512sums=('')
 
 build() {
