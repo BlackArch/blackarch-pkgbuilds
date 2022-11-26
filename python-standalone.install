@@ -9,6 +9,9 @@ post_install() {
     # if from pypi
     # pip install --isolated --root="/usr/share/NAME" --prefix='venv' \
     #   NAME
+    # if tehre is a pyproject.toml we don't need requirements.txt,
+    # then pip can read it automatically
+    # pip install --isolated --root="/usr/share/NAME" --prefix='venv' .
 }
 
 post_upgrade() {
