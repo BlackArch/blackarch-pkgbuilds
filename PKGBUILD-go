@@ -39,7 +39,6 @@ build() {
     -modcacherw \
     -ldflags "-s -w" \
     -o $pkgname .
-
 }
 
 package() {
