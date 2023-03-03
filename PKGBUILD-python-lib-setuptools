@@ -1,8 +1,8 @@
 # This file is part of BlackArch Linux ( https://www.blackarch.org/ ).
 # See COPYING for license details.
 
-pkgname=NAME
-_pkgname=realname
+pkgname=python-NAME
+_pkgname=${pkgname#python-}
 pkgver=VERSION
 pkgrel=1
 pkgdesc='Short description without using the package name itself.'
