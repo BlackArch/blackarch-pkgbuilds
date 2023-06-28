@@ -16,19 +16,19 @@ noextract=("$_gemname-$pkgver.gem")
 sha512sums=()
 
 package() {
-  _gemdir="$(ruby -e'puts Gem.default_dir')"
+  _gemhome="$(gem env home)"
 
   gem install --ignore-dependencies --no-user-install --no-document \
-    -i "$pkgdir/$_gemdir" -n "$pkgdir/usr/bin" "$_gemname-$pkgver.gem"
+    -i "$pkgdir/$_gemhome" -n "$pkgdir/usr/bin" "$_gemname-$pkgver.gem"
 
-  rm "$pkgdir/$_gemdir/cache/$_gemname-$pkgver.gem"
-  rm -r "$pkgdir/$_gemdir/gems/$_gemname-$pkgver/test"
+  rm "$pkgdir/$_gemhome/cache/$_gemname-$pkgver.gem"
+  rm -r "$pkgdir/$_gemhome/gems/$_gemname-$pkgver/test"
 
-  find "$pkgdir/$_gemdir/extensions/" -name *.so -delete
+  find "$pkgdir/$_gemhome/extensions/" -name *.so -delete
 
   # Only install license if required according to
   # https://wiki.archlinux.org/index.php/PKGBUILD#license
-  install -Dm 644 "$pkgdir/$_gemdir/gems/$_gemname-$pkgver/LICENSE.txt" \
+  install -Dm 644 "$pkgdir/$_gemhome/gems/$_gemname-$pkgver/LICENSE.txt" \
     "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 
