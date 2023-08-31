@@ -35,6 +35,6 @@ package() {
     --prefix=/usr \
     --no-index \
     --find-links="file://$startdir/dist" \
-    "$_pkgname"
+    $_pkgname
 }
 
