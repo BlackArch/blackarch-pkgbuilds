@@ -25,6 +25,9 @@ pkgver() {
 }
 
 build() {
+  # If building the package fails, uncomment the following line.
+  # See https://archlinux.org/todo/lto-fat-objects/ for more details.
+  #CFLAGS+=' -ffat-lto-objects'
   cd $pkgname
 
   cargo build --release --locked
