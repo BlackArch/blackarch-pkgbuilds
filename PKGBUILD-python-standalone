@@ -9,7 +9,7 @@ arch=('any' OR 'x86_64' 'aarch64')
 groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
 url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
-depends=('python')
+depends=('python' 'python-virtualenv')
 makedepends=('git' 'python-setuptools' 'python-pip')
 source=("git+https://github.com/foo/$pkgname.git")
 # if from pypi
