@@ -18,3 +18,7 @@ post_upgrade() {
   post_install "$@"
 }
 
+post_remove() {
+  # /usr/share/NAME/venv
+  rm -r /usr/share/NAME
+}

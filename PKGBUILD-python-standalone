@@ -47,6 +47,8 @@ package() {
 source /usr/share/$pkgname/venv/bin/activate
 exec python /usr/share/$pkgname/NAME.py "\$@"
 EOF
+# if from install from pypi and not from source
+# exec /usr/share/$pkgname/venv/bin/$pkgname "\$@"
 
   chmod a+x "$pkgdir/usr/bin/$pkgname"
 }
