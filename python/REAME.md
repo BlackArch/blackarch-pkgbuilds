@@ -1,0 +1,12 @@
+- I get a `pyproject.toml`
+  - it's a tool
+    - ➡️ `PKGBUILD-python-PEP517-pip`
+  - it's a library
+    - ➡️ `PKGBUILD-python-lib-PEP517-pip`
+- I get a `setup.py`
+  - it's a tool
+    - ➡️ `PKGBUILD-python-PEP517-setuptools`
+  - it's a library
+    - ➡️ `PKGBUILD-python-lib-PEP517-setuptools`
+- Dependencies are oudated and not compatible with existing packages, dependencies changes too often, there are too much dependencies not already packaged
+  - ➡️ `PKGBUILD-python-standalone` and `python-standalone.install`
