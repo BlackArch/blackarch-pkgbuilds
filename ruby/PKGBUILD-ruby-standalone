@@ -43,10 +43,11 @@ package() {
 
   cp --no-preserve=ownership -a * "$pkgdir/usr/share/$pkgname/"
 
+  # need to cd to load .bundle/
   cat > "$pkgdir/usr/bin/$pkgname" << EOF
 #!/bin/sh
 cd /usr/share/$pkgname
-exec ruby $pkgname "\$@"
+exec bundle exec ruby $pkgname "\$@"
 EOF
 
   chmod +x "$pkgdir"/usr/bin/*
