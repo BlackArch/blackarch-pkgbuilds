@@ -51,6 +51,6 @@ EOF
 # if from install from pypi and not from source
 # exec /usr/share/$pkgname/venv/bin/$pkgname "\$@"
 
-  chmod a+x "$pkgdir/usr/bin/$pkgname"
+  chmod +x "$pkgdir/usr/bin/$pkgname"
 }
 

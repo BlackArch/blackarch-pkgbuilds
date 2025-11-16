@@ -10,7 +10,8 @@ groups=('blackarch' MORE_BLACKARCH_GROUPS_HERE)
 url='URL pointing to download section of package'
 license=('WHATEVER' OR 'custom:unknown')
 depends=('python')
-makedepends=('python-build' 'python-installer' 'python-setuptools' 'python-wheel')
+makedepends=('python-build' 'python-installer' 'python-setuptools'
+             'python-wheel')
 source=("https://files.pythonhosted.org/packages/source/${pkgname::1}/$pkgname/$pkgname-$pkgver.tar.gz")
 sha512sums=('')
 

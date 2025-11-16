@@ -3,15 +3,15 @@ post_install() {
   cd /usr/share/NAME
   python -m venv venv
   source venv/bin/activate &&
-    pip install --isolated --root="/usr/share/NAME" --prefix='venv' \
+    pip install --isolated --root=/usr/share/NAME --prefix=venv \
       -r requirements.txt
     pip install -e .
     # if from pypi
-    # pip install --isolated --root="/usr/share/NAME" --prefix='venv' \
+    # pip install --isolated --root=/usr/share/NAME --prefix=venv \
     #   NAME
     # if there is a pyproject.toml we don't need requirements.txt,
     # then pip can read it automatically
-    # pip install --isolated --root="/usr/share/NAME" --prefix='venv' .
+    # pip install --isolated --root=/usr/share/NAME --prefix=venv
 }
 
 post_upgrade() {
@@ -22,3 +22,4 @@ post_remove() {
   # /usr/share/NAME/venv
   rm -r /usr/share/NAME
 }
+

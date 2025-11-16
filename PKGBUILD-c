@@ -17,7 +17,12 @@ sha512sums=('')
 prepare() {
   cd "$pkgname-$pkgver"
 
-  ./configure --prefix=/usr --what-ever-opt
+  if [[ "$CARCH" == "aarch64" ]];
+  then
+    ./configure --build=arm --prefix=/usr --what-ever-opt
+  else
+    ./configure --prefix=/usr --what-ever-opt
+  fi
 }
 
 build() {
