@@ -25,6 +25,6 @@ post_upgrade() {
 
 post_remove() {
   # /usr/share/NAME/venv
-  rm -r /usr/share/NAME
+  rm -rf /usr/share/NAME
 }
 
