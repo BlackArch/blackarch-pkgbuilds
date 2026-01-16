@@ -12,7 +12,7 @@ license=('WHATEVER' OR 'custom:unknown')
 depends=()
 makedepends=()
 source=("https://foo.bar/downloads/$pkgname-$pkgver.zip")
-sha512sums=('')
+sha512sums=('NULL')
 
 package() {
   install -dm 755 "$pkgdir/opt/windows/$pkgname"

@@ -12,7 +12,7 @@ license=('WHATEVER' OR 'custom:unknown')
 depends=()
 makedepends=('git' 'cargo')
 source=("git+https://github.com/foo/$pkgname.git")
-sha512sums=('')
+sha512sums=('NULL')
 
 pkgver() {
   cd $pkgname
