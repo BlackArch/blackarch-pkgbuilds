@@ -12,7 +12,7 @@ license=('WHATEVER' OR 'custom:unknown')
 depends=('python')
 makedepends=('python-build' 'python-pip')
 source=("https://files.pythonhosted.org/packages/source/${pkgname::1}/$pkgname/$pkgname-$pkgver.tar.gz")
-sha512sums=('')
+sha512sums=('NULL')
 
 build() {
   cd "$pkgname-$pkgver"
